@@ -1,10 +1,10 @@
 <?php
-
+header("Content-Type:text/html;charset=utf-8");
 	class mysqlceshiFamily{
 		public $ip="127.0.0.1";
 		public $root="root";
 		public $password ="";
-		public $DBNAME="demo";
+		public $DBNAME="company";
 	
 		public $con ;
 		//抽象成员属性sql语句
@@ -30,6 +30,7 @@
 		}
 		//抽象查询方法
 		public function selectfangfa(){
+			//实例化一个数据库控制类  存在构造方法和析构方法 执行打开和关闭数据库
 			
 			//解析数据
 			$result = mysql_query($this ->sql);
@@ -47,7 +48,8 @@
 		}
 			
 		public function insertfangfa(){
-			//实例化一个控制数据库的类
+		
+			
 			//执行sql语句
 			$result = mysql_query($this ->sql);
 			//上次插入的id
@@ -70,11 +72,6 @@
 			
 		}
 		
-	}
-	function pdsess(){
-		if(empty($_SESSION["username"])){
-			header("location:?c=public&a=login");
-		}
 	}
 	function zengshangaicha($sql){
 			//判断现在所执行的sql语句属于增删改查的哪一个。
@@ -100,23 +97,5 @@
 			//实例化一个成员属性  属性名为刚才判断的sql语句所属类目   属性内容为返回的结果集
 			
 			
-		}
-		//后台封装传图片过程
-	function images($tp,$lujin){
-		if($tp["type"]=="image/gif"){
-					
-			$type="gif";
-			
-		}elseif($tp["type"]=="image/jpeg"){
-			
-			$type="jpeg";
-			
-		}elseif($tp["type"]=="image/png"){
-			
-			$type="png";
-			
-		}
-		$name = uniqid().time().".".$type;
-		$a = move_uploaded_file($tp["tmp_name"],$lujin.$name);
-		return $name;
 	}
+	
